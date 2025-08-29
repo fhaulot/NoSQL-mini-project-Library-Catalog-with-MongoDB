@@ -1,54 +1,53 @@
 # 📚 NoSQL Mini-Project: Library Catalog with MongoDB
 
-In this project, you’ll design a **Library Catalog** using **MongoDB**, a popular open-source NoSQL document database.  
-The project simulates how real libraries store, search, and analyze data.  
+## Overview
 
+This project demonstrates how to build a simple library catalog using MongoDB and Python.  
+It covers data preprocessing, document modeling, data insertion, and querying using PyMongo.
 
+## Project Structure
 
-## 🎯 Goal
-By the end of this exercise, you should be able to:  
-- Understand **NoSQL document structures** (flexible schemas, nested fields)  
-- Load and explore data from an **open dataset**  
-- Run **queries** (filters, ranges, nested fields)  
-- Perform **aggregations** (counts, averages, group by)  
-- Update documents dynamically  
+- `preprocessing.py`: Preprocesses the CSV data and formats it for MongoDB.
+- `storing.py`: Loads the preprocessed data into MongoDB.
+- `mongodb.ipynb`: Jupyter notebook for running queries and updates on the MongoDB collection.
+- `books.csv`: The dataset (not included in this repo for copyright reasons).
 
+## Getting Started
 
+### 1. Requirements
 
-## 📂 Dataset
-Use an **open-source dataset** about books. Possible options:  
-- [Open Library Dataset](https://openlibrary.org/developers/dumps) (JSON data about books and authors)  
-- Any Kaggle dataset about books (e.g., Goodreads or book metadata)  
+- Python 3.8+
+- pandas
+- pymongo
+- Docker (for running MongoDB locally)
 
-👉 Choose a dataset that contains at least:  
-- Book titles  
-- Authors  
-- Publication year  
-- Genres or subjects  
-- Ratings or popularity information (if available)  
+### 2. Setup MongoDB with Docker
 
+Start a MongoDB container:
+```bash
+docker run -d -p 27017:27017 --name mongodb mongo:6.0
+```
 
+### 3. Preprocess and Insert Data
 
-## 🛠️ Setup
+Activate your virtual environment and install dependencies:
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install pandas pymongo
+```
 
-1. Run MongoDB locally or with Docker:  
-   ```bash
-   docker run -d -p 27017:27017 --name mongodb mongo:6.0
-   ```
+Preprocess and insert data:
+```bash
+python storing.py
+```
 
-2. Install the Python client:  
-   ```bash
-   pip install pymongo
-   ```
+### 4. Run Queries
 
-3. Start a Python notebook or script to interact with the database.  
+Open `mongodb.ipynb` and run the cells to explore and update your library catalog.
 
+## Example Document Structure
 
-
-## 📋 General Guidelines
-
-### Step 1. Design Your Document Model
-Think about how to store your book data in MongoDB. Example structure:  
 ```json
 {
   "title": "The Hobbit",
@@ -58,58 +57,14 @@ Think about how to store your book data in MongoDB. Example structure:
   "ratings": [5, 4, 5, 5]
 }
 ```
-- You can embed the **author** inside the book document  
-- Use arrays for **genres** and **ratings**  
 
-### Step 2. Insert Data
-- Load your chosen dataset (CSV or JSON) with Python/pandas  
-- Insert it into a MongoDB collection called `books`  
-- Insert at least **100 records**  
+## Features
 
-### Step 3. Run Queries
-Write queries such as:  
-- Find all books in a given genre  
-- Find books published after a certain year  
-- Find books by a specific author  
+- Flexible document model with embedded author info
+- Data cleaning and normalization
+- Example queries and aggregations
+- Update operations (add ratings, update genres, etc.)
 
-### Step 4. Aggregations
-Use MongoDB’s aggregation pipeline to answer:  
-- What is the **average rating** per book?  
-- How many books are there per genre?  
-- Which authors are most common in the dataset?  
+## License
 
-### Step 5. Updates
-Practice modifying documents:  
-- Add a new rating to a book  
-- Add missing author fields if incomplete  
-- Update genre lists  
-
-
-## ✅ Deliverables
-
-1 repository and your code and queries should follow **clean coding practices**:  
-- Use clear variable names  
-- Add docstrings to functions  
-- Organize queries and aggregations in reusable functions  
-- Avoid duplicating logic  
-
-
-### 🟢 Must-Have
-By the end, you should have:  
-1. A `books` collection with a meaningful number of documents (at least ~100)  
-2. Several **basic queries** exploring the data (e.g., filtering, nested fields, range queries)  
-3. At least one **aggregation** to get insights from the data (e.g., average, count, group by)  
-4. At least one **update** modifying a document  
-
-### 🌟 Nice-to-Have
-If you finish early or want to explore advanced features:  
-- Add additional collections (e.g., `users` with borrowing history)  
-- Run more complex queries across collections (e.g., *Which users borrowed Sci-Fi books?*)  
-- Perform more advanced aggregations (e.g., *most borrowed authors*)  
-- Build a simple dashboard or visualization with [MongoDB Compass](https://www.mongodb.com/products/compass) or another tool  
-- Add **error handling and logging** in your Python code  
-- Explore indexing strategies or text search features for improved performance  
-
-
-
-💡 **Key takeaway:** MongoDB (and NoSQL in general) is flexible: you don’t need a fixed schema, you can embed nested data, and you can run powerful analytics directly in the database.
+This project is open source and free to use for educational purposes.
